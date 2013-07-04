@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/specularmap.frag</file>
+        <file>shaders/specularmap.vert</file>
+    </qresource>
+</RCC>

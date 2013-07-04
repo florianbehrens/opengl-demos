@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/alphamap.frag</file>
+        <file>shaders/alphamap.vert</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,103 @@
+#version 400
+
+// Only one vertex per patch (lower-left corner)
+layout( vertices = 1 ) out;
+
+// xz position from vertex shader
+in vec2 v_position[];
+
+// xz position to tessellation evaluation shader
+out vec2 tc_position[];
+
+uniform sampler2D heightMap;
+
+// Fully tessellated!
+const float tessellationLevel = 64.0;
+
+// The number of triangles created per height-map texel
+uniform int maxTrianglesPerTexel = 3;
+
+// Distance between each tessellation point at max tess level
+uniform float horizontalScale = 10.0;
+
+// Vertical scale to multiply height samples by
+uniform float verticalScale = 0.4;
+
+// Transformation matrix
+uniform mat4 mvp;
+
+const float maxTessLevel = 64.0;
+
+// Determine if patch is potentially visible or not based upon the
+// extent of it's 4 edges. Ignores vertical extent of internal points!
+// A better way would be to pass in the maximum vertical extent of
+// all points in this patch as an additional per-vertex attribute.
+// We can then construct a axis-aligned bounding box for this patch
+// and test that against the view frustrum
+bool isEdgeInViewFrustum( const in vec4 p1, const in vec4 p2 )
+{
+    return !( ( p1.x < -p1.w && p2.x < -p2.w )
+           || ( p1.x >  p1.w && p2.x >  p2.w )
+           || ( p1.y < -p1.w && p2.y < -p2.w )
+           || ( p1.y >  p1.w && p2.y >  p2.w )
+           || ( p1.z < -p1.w && p2.z < -p2.w )
+           || ( p1.z >  p1.w && p2.z >  p2.w ) );
+}
+
+// Looks up height form height map texture and scales
+float height( const in vec2 textureCoords )
+{
+    return verticalScale * texture( heightMap, textureCoords ).r;
+}
+
+void main()
+{
+    // Pass along the vertex position unmodified
+    tc_position[gl_InvocationID] = v_position[gl_InvocationID];
+
+    // Calculate extent of this patch in texture coords [0,1]
+    vec2 patchExtent = maxTessLevel / ( textureSize( heightMap, 0 ) * maxTrianglesPerTexel );
+
+    vec2 patchCornersXZ[4];
+    patchCornersXZ[0] = tc_position[gl_InvocationID];
+    patchCornersXZ[1] = tc_position[gl_InvocationID] + vec2( 0.0, patchExtent.y );
+    patchCornersXZ[2] = tc_position[gl_InvocationID] + vec2( patchExtent.x, 0.0 );
+    patchCornersXZ[3] = tc_position[gl_InvocationID] + patchExtent;
+
+    vec4 clipSpacePatchCorners[4];
+    for ( int i = 0; i < 4; i++ )
+    {
+        vec4 position;
+        position.xz = patchCornersXZ[i] * horizontalScale;
+        position.y = verticalScale * texture( heightMap, patchCornersXZ[i] ).r;
+        position.w = 1.0;
+
+        // Transform to clip-space
+        clipSpacePatchCorners[i] = mvp * position;
+    }
+
+    // Determine if we can cull this patch
+    if ( isEdgeInViewFrustum( clipSpacePatchCorners[0], clipSpacePatchCorners[2] )
+      || isEdgeInViewFrustum( clipSpacePatchCorners[0], clipSpacePatchCorners[1] )
+      || isEdgeInViewFrustum( clipSpacePatchCorners[1], clipSpacePatchCorners[3] )
+      || isEdgeInViewFrustum( clipSpacePatchCorners[2], clipSpacePatchCorners[3] ) )
+    {
+        // Set the tessellation levels to maximum!
+        gl_TessLevelOuter[0] = 32.0; //tessellationLevel;
+        gl_TessLevelOuter[1] = 32.0; //tessellationLevel;
+        gl_TessLevelOuter[2] = 32.0; //tessellationLevel;
+        gl_TessLevelOuter[3] = 32.0; //tessellationLevel;
+        gl_TessLevelInner[0] = tessellationLevel;
+        gl_TessLevelInner[1] = tessellationLevel;
+    }
+    else
+    {
+        // Set the tessellation levels to 0 to cull the patch
+        gl_TessLevelOuter[0] = 0.0;
+        gl_TessLevelOuter[1] = 0.0;
+        gl_TessLevelOuter[2] = 0.0;
+        gl_TessLevelOuter[3] = 0.0;
+        gl_TessLevelInner[0] = 0.0;
+        gl_TessLevelInner[1] = 0.0;
+    }
+}

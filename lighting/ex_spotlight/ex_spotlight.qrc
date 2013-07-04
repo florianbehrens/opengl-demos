@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/spotlight.frag</file>
+        <file>shaders/spotlight.vert</file>
+    </qresource>
+</RCC>

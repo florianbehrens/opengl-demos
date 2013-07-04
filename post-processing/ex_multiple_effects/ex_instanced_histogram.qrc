@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/instancedhistogram.frag</file>
+        <file>shaders/instancedhistogram.vert</file>
+        <file>shaders/noise.frag</file>
+        <file>shaders/noise.vert</file>
+        <file>shaders/gaussianblur.frag</file>
+        <file>shaders/gaussianblur.vert</file>
+        <file>shaders/television.frag</file>
+        <file>shaders/television.vert</file>
+    </qresource>
+</RCC>

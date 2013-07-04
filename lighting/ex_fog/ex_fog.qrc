@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/fog.frag</file>
+        <file>shaders/fog.vert</file>
+    </qresource>
+</RCC>

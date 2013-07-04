@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/toon.frag</file>
+        <file>shaders/toon.vert</file>
+    </qresource>
+</RCC>

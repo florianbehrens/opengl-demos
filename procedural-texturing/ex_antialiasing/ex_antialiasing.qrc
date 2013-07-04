@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/antialiasing.frag</file>
+        <file>shaders/antialiasing.vert</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/ambientocclusion.frag</file>
+        <file>shaders/ambientocclusion.vert</file>
+    </qresource>
+</RCC>

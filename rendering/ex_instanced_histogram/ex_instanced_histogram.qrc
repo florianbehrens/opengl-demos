@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/instancedhistogram.frag</file>
+        <file>shaders/instancedhistogram.vert</file>
+        <file>shaders/noise.frag</file>
+        <file>shaders/noise.vert</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/skyboxreflection.frag</file>
+        <file>shaders/skyboxreflection.vert</file>
+        <file>shaders/skybox.vert</file>
+        <file>shaders/skybox.frag</file>
+    </qresource>
+</RCC>

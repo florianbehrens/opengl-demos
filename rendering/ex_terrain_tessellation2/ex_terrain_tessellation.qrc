@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/terraintessellation.frag</file>
+        <file>shaders/terraintessellation.geom</file>
+        <file>shaders/terraintessellation.tcs</file>
+        <file>shaders/terraintessellation.tes</file>
+        <file>shaders/terraintessellation.vert</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/multiplelights.frag</file>
+        <file>shaders/multiplelights.vert</file>
+    </qresource>
+</RCC>

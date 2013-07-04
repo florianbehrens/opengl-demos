@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/simpletexture.frag</file>
+        <file>shaders/simpletexture.vert</file>
+        <file>assets/tom.jpg</file>
+    </qresource>
+</RCC>

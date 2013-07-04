@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/instancedgeometry.frag</file>
+        <file>shaders/instancedgeometry.vert</file>
+    </qresource>
+</RCC>

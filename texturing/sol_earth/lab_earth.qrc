@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/earth.frag</file>
+        <file>shaders/earth.vert</file>
+    </qresource>
+</RCC>

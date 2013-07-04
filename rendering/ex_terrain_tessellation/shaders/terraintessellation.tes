@@ -1,0 +1,41 @@
+#version 400
+
+layout( quads, fractional_even_spacing, cw ) in;
+
+in vec2 tc_position[];
+
+out vec2 te_texCoords;
+
+uniform sampler2D heightMap;
+
+// The number of triangles created per height-map texel
+uniform int maxTrianglesPerTexel = 3;
+
+// Distance between each tessellation point at max tess level
+uniform float horizontalScale = 10.0;
+
+// Vertical scale to multiply height samples by
+uniform float verticalScale = 0.4;
+
+// Transformation matrix
+uniform mat4 mvp;
+
+const float maxTessLevel = 64.0;
+
+void main()
+{
+    // Calculate extent of this patch in texture coords [0,1]
+    vec2 patchExtent = maxTessLevel / ( textureSize( heightMap, 0 ) * maxTrianglesPerTexel );
+
+    // Calculate the texture coordinates
+    te_texCoords = tc_position[0].xy + gl_TessCoord.xy * patchExtent;
+
+    // Calculate the position in model space
+    vec4 position;
+    position.xz = te_texCoords * horizontalScale;
+    position.y = verticalScale * texture( heightMap, te_texCoords ).r;
+    position.w = 1.0;
+
+    // Transform to clip-space
+    gl_Position = mvp * position;
+}

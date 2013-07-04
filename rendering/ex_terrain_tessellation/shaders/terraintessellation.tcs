@@ -1,0 +1,27 @@
+#version 400
+
+// Only one vertex per patch (lower-left corner)
+layout( vertices = 1 ) out;
+
+// xz position from vertex shader
+in vec2 v_position[];
+
+// xz position to tessellation evaluation shader
+out vec2 tc_position[];
+
+// Fully tessellated!
+const float tessellationLevel = 64.0;
+
+void main()
+{
+    // Pass along the vertex position unmodified
+    tc_position[gl_InvocationID] = v_position[gl_InvocationID];
+
+    // Set the tessellation levels to maximum!
+    gl_TessLevelOuter[0] = tessellationLevel;
+    gl_TessLevelOuter[1] = tessellationLevel;
+    gl_TessLevelOuter[2] = tessellationLevel;
+    gl_TessLevelOuter[3] = tessellationLevel;
+    gl_TessLevelInner[0] = tessellationLevel;
+    gl_TessLevelInner[1] = tessellationLevel;
+}

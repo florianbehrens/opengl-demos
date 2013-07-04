@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/quadtessellation.frag</file>
+        <file>shaders/quadtessellation.geom</file>
+        <file>shaders/quadtessellation.vert</file>
+        <file>shaders/quadtessellation.tcs</file>
+        <file>shaders/quadtessellation.tes</file>
+    </qresource>
+</RCC>

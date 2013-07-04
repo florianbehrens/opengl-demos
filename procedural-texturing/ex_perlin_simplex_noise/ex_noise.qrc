@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/noise.frag</file>
+        <file>shaders/noise.vert</file>
+    </qresource>
+</RCC>

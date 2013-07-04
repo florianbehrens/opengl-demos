@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/normalmap.frag</file>
+        <file>shaders/normalmap.vert</file>
+        <file>shaders/normalmap_2_1.frag</file>
+        <file>shaders/normalmap_2_1.vert</file>
+    </qresource>
+</RCC>

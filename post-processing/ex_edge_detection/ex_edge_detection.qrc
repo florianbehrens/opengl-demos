@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/phong.frag</file>
+        <file>shaders/phong.vert</file>
+        <file>shaders/edgedetect.vert</file>
+        <file>shaders/edgedetect.frag</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/bumpmap.frag</file>
+        <file>shaders/bumpmap.vert</file>
+        <file>shaders/line.frag</file>
+        <file>shaders/line.vert</file>
+    </qresource>
+</RCC>
