@@ -73,7 +73,7 @@ void Cylinder::generateVertexData( QVector<float>& vertices,
     // Resize vector to hold our data
     vertices.resize( 3 * nVerts );
     normals.resize( 3 * nVerts );
-    indices.resize( 6 * faces + 2 * 3 * m_slices );
+    indices.resize( ( m_rings - 1 ) * 6 * m_slices + 6 * m_slices );
 
     // The side of the cylinder
     const float dTheta = twoPi / static_cast<float>( m_slices );
